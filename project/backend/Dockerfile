@@ -2,7 +2,7 @@
 FROM python:3.9.6-slim-buster
 
 #working directroy
-WORKDIR /usr/src/app/
+WORKDIR /usr/src/app
 
 #environment variables
 ENV PYTHONDONTWRITERBYTECODE 1
