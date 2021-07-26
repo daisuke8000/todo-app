@@ -2,7 +2,7 @@
 FROM python:3.9.6-slim-buster
 
 #working directroy
-WORKDIR /usr/src/app
+WORKDIR /usr/src/
 
 #environment variables
 ENV PYTHONDONTWRITERBYTECODE 1
@@ -22,9 +22,9 @@ RUN pip install -r requirements-dev.txt
 #add app
 COPY . .
 
-##add entrypoint.sh
-#COPY ./entrypoint.sh .
-#RUN chmod +x /usr/src/app/entrypoint.sh
-#
-##entrypoint.sh
-#ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+#add entrypoint.sh
+COPY ./entrypoint.sh .
+RUN chmod +x /usr/src/entrypoint.sh
+
+#entrypoint.sh
+ENTRYPOINT ["/usr/src/entrypoint.sh"]
