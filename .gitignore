@@ -1,4 +1,5 @@
 .idea
 .DS_store
-project/backend/app/__pycache__/
+project/backend/app/__pycache__
+project/backend/app/models/__pycache__
 project/backend/.dockerignore
