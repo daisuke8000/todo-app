@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Todo from './Components/Todo';
 import { ChakraProvider } from "@chakra-ui/react";
+// import theme from "./theme/theme";
 
 
 function App() {
