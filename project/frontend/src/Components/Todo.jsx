@@ -32,10 +32,10 @@ function AddTodo() {
     const handleSubmit = (event) => {
         const newTodo = {
             "id": todos.length + 1,
-            "item": item
+            "todo": item
         }
 
-        fetch("http://localhost:8004/todo", {
+        fetch("http://localhost:8004/todos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTodo)
@@ -137,9 +137,10 @@ function TodoHelper({item, id, fetchTodos}) {
 export default function Todos() {
     const [todos, setTodos] = useState([])
     const fetchTodos = async () => {
-        const response = await fetch("http://localhost:8004/todo")
+        const response = await fetch("http://localhost:8004/todos")
         const todos = await response.json()
-        setTodos(todos.data)
+        console.log(todos)
+        setTodos(todos)
     }
     useEffect(() => {
         fetchTodos()
@@ -150,7 +151,7 @@ export default function Todos() {
             <Stack spacing={5}>
                 {
                     todos.map((todo) => (
-                        <TodoHelper item={todo.item} id={todo.id} fetchTodos={fetchTodos} />
+                        <TodoHelper item={todo.todo} id={todo.id} fetchTodos={fetchTodos} />
                     ))
                 }
             </Stack>

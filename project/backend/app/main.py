@@ -1,9 +1,13 @@
+import logging
 import os
 
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import todo
+from app.db import init_db
+
+log = logging.getLogger("uvicorn")
 
 
 def create_application() -> FastAPI:
@@ -16,15 +20,16 @@ def create_application() -> FastAPI:
         add_exception_handlers=True,
     )
 
-    application.include_router(todo.router)
+    application.include_router(todo.router, prefix="/todos", tags=["todos"])
 
     return application
 
 
 app = create_application()
+
 origins = [
     "*",
-    "localhost:3000"
+    "localhost:3000",
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -33,3 +38,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+@app.on_event("startup")
+async def startup_event():
+    log.info("Starting up...")
+    init_db(app)
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    log.info("Shutting down...")

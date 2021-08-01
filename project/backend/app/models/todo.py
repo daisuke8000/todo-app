@@ -1,12 +1,13 @@
 from tortoise import fields, models
+from tortoise.contrib.pydantic import pydantic_model_creator
 
 
 class TodoSummary(models.Model):
-    id = fields.IntField(pk=True)
-    todo = fields.CharField(null=False, max_length=10)
-    limit = fields.DateField(auto_now_add=False)
-    summary = fields.TextField(null=False)
+    todo = fields.TextField()
     created_at = fields.DatetimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.id
+        return self.todo
+
+
+TodoSummarySchema = pydantic_model_creator(TodoSummary)
