@@ -1,19 +1,23 @@
 import React from 'react';
-import './App.css';
-import Todo from './Components/Todo';
-import { ChakraProvider } from "@chakra-ui/react";
-// import theme from "./theme/theme";
+
+
+import { Basepage } from "./Components/Basepage";
+
+import {
+    ChakraProvider,
+} from "@chakra-ui/react";
+import theme from "./theme/theme";
 
 
 function App() {
   return (
-    <div className="App">
+    <>
       <header className="App-header">
-          <ChakraProvider>
-              <Todo/>
+          <ChakraProvider theme={theme}>
+              <Basepage/>
           </ChakraProvider>
       </header>
-    </div>
+    </>
   );
 }
 

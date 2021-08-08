@@ -5,7 +5,7 @@ FROM python:3.9.6-slim-buster
 WORKDIR /usr/src/
 
 #environment variables
-ENV PYTHONDONTWRITERBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 #install system depedencies

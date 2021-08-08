@@ -62,10 +62,10 @@ function UpdateTodo({item, id}) {
     const {fetchTodos} = React.useContext(TodosContext)
 
     const updateTodo = async () => {
-        await fetch(`http://localhost:8004/todo/${id}`, {
+        await fetch(`http://localhost:8004/todos/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ item: todo })
+            body: JSON.stringify({ todo: todo })
         })
         onClose()
         await fetchTodos()
@@ -105,7 +105,7 @@ function DeleteTodo({id}) {
     const {fetchTodos} = React.useContext(TodosContext)
 
     const deleteTodo = async () => {
-        await fetch(`http://localhost:8004/todo/${id}`, {
+        await fetch(`http://localhost:8004/todos/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: { "id": id }
@@ -151,7 +151,7 @@ export default function Todos() {
             <Stack spacing={5}>
                 {
                     todos.map((todo) => (
-                        <TodoHelper item={todo.todo} id={todo.id} fetchTodos={fetchTodos} />
+                        <TodoHelper key={todo.id} item={todo.todo} id={todo.id} fetchTodos={fetchTodos} />
                     ))
                 }
             </Stack>
