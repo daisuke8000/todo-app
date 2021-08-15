@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { Basepage } from "./Components/Basepage";
+import { IndexPage } from "./Components/IndexPage";
 
 import {
     ChakraProvider,
@@ -14,7 +14,7 @@ function App() {
     <>
       <header className="App-header">
           <ChakraProvider theme={theme}>
-              <Basepage/>
+              <IndexPage/>
           </ChakraProvider>
       </header>
     </>
