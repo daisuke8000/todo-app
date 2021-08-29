@@ -5,6 +5,7 @@ services:
     build:
       context: ./project/backend
       dockerfile: Dockerfile
+    entrypoint: ["/usr/src/entrypoint.sh"]
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - ./project/backend:/usr/src/
@@ -41,5 +42,8 @@ services:
       - /usr/src/node_modules
     ports:
       - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_SERVICE_URL=${REACT_APP_API_SERVICE_URL}
     depends_on:
       - api
