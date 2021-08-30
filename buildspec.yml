@@ -14,7 +14,7 @@ env:
             - docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
     build:
       commands:
-        - echo building images ...
+        - echo building images todo-app-backend, todo-app-frontend
         - >
           docker build \
           -f project/backend/Dockerfile.prod \
