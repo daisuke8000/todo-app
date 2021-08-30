@@ -5,8 +5,9 @@ services:
     build:
       context: ./project/backend
       dockerfile: Dockerfile
-    entrypoint: ["/usr/src/entrypoint.sh"]
+#    entrypoint: ["/usr/src/entrypoint.sh"]
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+#    command: gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
     volumes:
       - ./project/backend:/usr/src/
     ports:

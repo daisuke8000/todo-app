@@ -1,0 +1,33 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "ap-northeast-1"
+    REACT_APP_API_SERVICE_URL: "http://localhost:8004"
+
+  phases:
+    pre_build:
+      commands:
+        - echo logging in to ecr
+        - >
+          aws ecr get-login-password --region $AWS_REGION \
+            - docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    build:
+      commands:
+        - echo building images ...
+        - >
+          docker build \
+          -f project/backend/Dockerfile.prod \
+          -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/todo-app-backend:prod \
+          ./project/backend
+        - >
+          docker build \
+          -f project/frontend/Dockerfile.prod \
+          -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/todo-app-frontend:prod \
+          --build-arg NODE_ENV=production \
+          --build-arg REACT_APP_API_SERVICE_URL=${REACT_APP_API_SRVICE_URL} \
+          ./project/frontend
+    post_build:
+      commands:
+        - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/todo-app-backend:prod
+        - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/todo-app-frontend:prod
