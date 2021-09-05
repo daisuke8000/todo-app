@@ -25,7 +25,7 @@ env:
           -f project/frontend/Dockerfile.prod \
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/todo-app-frontend:prod \
           --build-arg NODE_ENV=production \
-          --build-arg REACT_APP_API_SERVICE_URL=${REACT_APP_API_SRVICE_URL} \
+          --build-arg REACT_APP_API_SERVICE_URL=${REACT_APP_API_SERVICE_URL} \
           ./project/frontend
     post_build:
       commands:
