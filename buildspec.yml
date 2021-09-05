@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     AWS_REGION: "ap-northeast-1"
-    REACT_APP_API_SERVICE_URL: "http://test-load-dev-1379066414.ap-northeast-1.elb.amazonaws.com"
+    REACT_APP_API_SERVICE_URL: "http://todo-app-alb-1882163211.ap-northeast-1.elb.amazonaws.com"
 
   phases:
     pre_build:
